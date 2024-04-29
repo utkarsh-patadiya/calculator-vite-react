@@ -81,7 +81,30 @@ export function calculate(eq) {
   
       return String(nums[0]); // convert result to string
     }
+  
+    function infix(eq) {
+      eq = eq.replace(/\s/g, ""); // remove whitespace from equation
+      let s = 0; // initialize start index
+      let e = 0; // initialize end index
+  
+      while (eq.includes("(")) {
+        // while there are brackets in equation
+        s = eq.lastIndexOf("("); // find the last '(' bracket in equation
+        e = eq.indexOf(")", s); // find the first ')' bracket in equation after s
+  
+        // perform the calculation on the basic equation
+        // which is sliced based on start and end indices
+        // now replace the whole sub-bracket equation with the result obtained
+        eq =
+          eq.slice(0, s) +
+          calcBasic(parseBasic(eq.slice(s + 1, e))) +
+          eq.slice(e + 1);
+      }
+  
+      // final calculation for the equation remaining without brackets
+      return calcBasic(parseBasic(eq));
+    }
 
-    return calcBasic(parseBasic(eq));
+    return infix(eq);
   }
   
