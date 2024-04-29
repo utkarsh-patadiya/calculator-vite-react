@@ -38,7 +38,7 @@ const EquationInput = ({ onCalculate }) => {
       onChange={handleInputChange}
       onKeyDown={handleKeyDown}
       style={{ minWidth: "200px", width: inputWidth }}
-      className="p-3 rounded border border-gray-500 hover:border-gray-300"
+      className="m-3 mr-0 p-3 rounded border border-gray-500 hover:border-gray-300"
       placeholder="Enter equation"
     />
   );

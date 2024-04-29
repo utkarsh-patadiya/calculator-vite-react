@@ -19,7 +19,7 @@ function App() {
       <div className="App">
         <EquationInput onCalculate={handleCalculate} />
 
-        <button onClick={handleCalculate}>Calculate</button>
+        <button className="m-3" onClick={handleCalculate}>Calculate</button>
 
         <Result result={result} />
       </div>
