@@ -1,20 +1,41 @@
-import { useState } from 'react'
-
-import './App.css'
-
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { calculate } from "./calculator/clac";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState("");
   const [inputWidth, setInputWidth] = useState("200px");
   
   const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setInputWidth(`${e.target.scrollWidth}px`);
   };
 
   const handleCalculate = () => {
+    const calculatedResult = calculate(inputValue);
+    setResult(calculatedResult);
   };
 
   const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleCalculate();
+    }
   };
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "c" && !event.ctrlKey) {
+        event.preventDefault(); // Prevent default action
+        document.getElementById("inputField").focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   return (
     <>
@@ -55,4 +76,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
